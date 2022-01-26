@@ -2,12 +2,12 @@
 
 #include <iostream>
 
+
 class SandboxApp : public Petard::Application
 {
 public:
 	SandboxApp() 
 	{
-		std::cout << "SandBoxApp created!";
 	}
 
 	~SandboxApp()

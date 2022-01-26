@@ -2,6 +2,7 @@
 
 #include "Core.h"
 
+
 namespace Petard {
 
 	class PETARD_API Application
