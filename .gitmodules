@@ -1,0 +1,6 @@
+[submodule "Petard/vendor/spdlog"]
+	path = Petard/vendor/spdlog
+	url = https://github.com/gabime/spdlog
+[submodule "Petard/vendor/GLFW"]
+	path = Petard/vendor/GLFW
+	url = https://github.com/havel-therock/glfw
