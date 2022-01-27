@@ -42,8 +42,8 @@ project "Petard"
 
 	links
 	{
-		"GLFW",
-		"opengl32.lib"
+		"opengl32.lib",
+		"GLFW"
 	}
 
 	filter "system:windows"

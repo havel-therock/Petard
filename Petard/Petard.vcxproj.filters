@@ -7,6 +7,12 @@
     <Filter Include="Petard\Events">
       <UniqueIdentifier>{E9694C75-552A-C8AB-1E65-11298AE40C88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Petard\Platform">
+      <UniqueIdentifier>{998F2C16-051B-9ADA-0E2C-1DCF7A36F6DA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Petard\Platform\Windows">
+      <UniqueIdentifier>{D3C2B829-3FFA-00C1-4804-65E4B4BA27BA}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Petard.h" />
@@ -34,6 +40,12 @@
     <ClInclude Include="src\Petard\Log.h">
       <Filter>Petard</Filter>
     </ClInclude>
+    <ClInclude Include="src\Petard\Platform\Windows\WindowsWindow.h">
+      <Filter>Petard\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Petard\Window.h">
+      <Filter>Petard</Filter>
+    </ClInclude>
     <ClInclude Include="src\pdpch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +54,9 @@
     </ClCompile>
     <ClCompile Include="src\Petard\Log.cpp">
       <Filter>Petard</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Petard\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Petard\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\pdpch.cpp" />
   </ItemGroup>

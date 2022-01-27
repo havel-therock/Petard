@@ -5,3 +5,7 @@ bin-int/
 
 # Files
 *.user
+
+# VS specific files
+*.vcxproj*
+*.sln
