@@ -41,6 +41,7 @@ namespace Petard {
 		{
 			std::stringstream ss;
 			ss << "MouseScrollEvent: " << m_XOffset << ", " << m_YOffset;
+			return ss.str();
 		}
 
 		EVENT_CLASS_TYPE(MouseScrolled)
