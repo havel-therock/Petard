@@ -1,8 +1,6 @@
 #pragma once
-
 #include "Petard/Window.h"
-
-#include <GLFW/glfw3.h>
+#include "Petard/glad_glfw.h"
 
 namespace Petard {
 

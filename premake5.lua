@@ -13,8 +13,9 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Petard/vendor/GLFW/include"
-
+IncludeDir["GLAD"] = "Petard/vendor/GLAD/include"
 include "Petard/vendor/GLFW"
+include "Petard/vendor/GLAD"
 
 project "Petard"
 	location "Petard"
@@ -37,13 +38,15 @@ project "Petard"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.GLAD}"
 	}
 
 	links
 	{
-		"opengl32.lib",
-		"GLFW"
+		"GLFW",
+		"GLAD",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
@@ -66,14 +69,17 @@ project "Petard"
 
 	filter "configurations:Debug"
 		defines "PD_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "PD_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "PD_DIST"
+		buildoptions "/MD"
 		optimize "On"
 
 project "Sandbox"
@@ -112,13 +118,17 @@ project "Sandbox"
 		}
 
 	filter "configurations:Debug"
-		defines "PD_DEBUG"
+		-- defines "PD_DEBUG"
+		buildoptions "/MDd"
+		-- linkoptions { '/NODEFAULTLIB:"LIBCMT"' }
 		symbols "On"
 
 	filter "configurations:Release"
-		defines "PD_RELEASE"
+		-- defines "PD_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
-		defines "PD_DIST"
+		-- defines "PD_DIST"
+		buildoptions "/MD"
 		optimize "On"

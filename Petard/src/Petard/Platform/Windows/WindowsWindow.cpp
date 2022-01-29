@@ -1,3 +1,5 @@
+//#include "pdpch.h"
+//#include "glad/glad.h"
 #include "pdpch.h"
 
 #include "WindowsWindow.h"
@@ -50,6 +52,8 @@ namespace Petard {
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
 		glfwSetWindowUserPointer(m_Window, &m_Data);
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		PD_CORE_ASSERT(status, "Could not initialize GLAD!");
 		SetVSync(true);
 
 		// Set GLFW callbacks
