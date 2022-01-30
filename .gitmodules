@@ -4,3 +4,6 @@
 [submodule "Petard/vendor/GLFW"]
 	path = Petard/vendor/GLFW
 	url = https://github.com/havel-therock/glfw
+[submodule "Petard/vendor/imgui"]
+	path = Petard/vendor/imgui
+	url = https://github.com/havel-therock/imgui.git

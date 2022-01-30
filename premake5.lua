@@ -14,8 +14,11 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Petard/vendor/GLFW/include"
 IncludeDir["GLAD"] = "Petard/vendor/GLAD/include"
+IncludeDir["imgui"] = "Petard/vendor/imgui"	--if problem add include here
+
 include "Petard/vendor/GLFW"
 include "Petard/vendor/GLAD"
+include "Petard/vendor/imgui"
 
 project "Petard"
 	location "Petard"
@@ -39,13 +42,15 @@ project "Petard"
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.GLAD}"
+		"%{IncludeDir.GLAD}",
+		"%{IncludeDir.imgui}"
 	}
 
 	links
 	{
 		"GLFW",
 		"GLAD",
+		"imgui",
 		"opengl32.lib"
 	}
 
@@ -118,17 +123,13 @@ project "Sandbox"
 		}
 
 	filter "configurations:Debug"
-		-- defines "PD_DEBUG"
 		buildoptions "/MDd"
-		-- linkoptions { '/NODEFAULTLIB:"LIBCMT"' }
 		symbols "On"
 
 	filter "configurations:Release"
-		-- defines "PD_RELEASE"
 		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
-		-- defines "PD_DIST"
 		buildoptions "/MD"
 		optimize "On"

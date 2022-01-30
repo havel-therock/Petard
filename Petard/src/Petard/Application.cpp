@@ -3,12 +3,18 @@
 
 #include "Petard/Log.h"
 
+#include "Input.h"
+
 namespace Petard {
-	
+
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1) 
+
+	Application* Application::s_Instance = nullptr;
 
 	Application::Application()
 	{
+		PD_CORE_ASSERT(!s_Instance, "Application already exists!");
+		s_Instance = this;
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 	}
@@ -32,7 +38,6 @@ namespace Petard {
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
-		PD_CORE_TRACE("{0}", e);
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
 		{
@@ -48,7 +53,10 @@ namespace Petard {
 		{
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
-			
+
+			auto [x, y] = Input::GetMousePos();
+			PD_CORE_TRACE("{0}, {1}", x, y);
+
 			m_Window->OnUpdate();
 		}
 	}
