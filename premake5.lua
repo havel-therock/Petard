@@ -14,7 +14,8 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Petard/vendor/GLFW/include"
 IncludeDir["GLAD"] = "Petard/vendor/GLAD/include"
-IncludeDir["imgui"] = "Petard/vendor/imgui"	--if problem add include here
+IncludeDir["imgui"] = "Petard/vendor/imgui"	
+IncludeDir["glm"] = "Petard/vendor/glm"
 
 include "Petard/vendor/GLFW"
 include "Petard/vendor/GLAD"
@@ -22,8 +23,10 @@ include "Petard/vendor/imgui"
 
 project "Petard"
 	location "Petard"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "On"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -43,7 +46,8 @@ project "Petard"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.GLAD}",
-		"%{IncludeDir.imgui}"
+		"%{IncludeDir.imgui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -55,42 +59,33 @@ project "Petard"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
 		{
-			"PD_PLATFORM_WINDOWS",
-			"PD_BUILD_DLL"
-		}
-
-		--- change this in to prebuild comend before every gameproject
-
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+			"PD_PLATFORM_WINDOWS"
 		}
 
 	filter "configurations:Debug"
 		defines "PD_DEBUG"
-		buildoptions "/MDd"
-		symbols "On"
+		runtime "Debug"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "PD_RELEASE"
-		buildoptions "/MD"
-		optimize "On"
+		runtime "Release"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "PD_DIST"
-		buildoptions "/MD"
-		optimize "On"
+		runtime "Release"
+		optimize "on"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -104,7 +99,8 @@ project "Sandbox"
 	includedirs
 	{
 		"Petard/vendor/spdlog/include",
-		"Petard/src"
+		"Petard/src",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -113,8 +109,6 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -123,13 +117,16 @@ project "Sandbox"
 		}
 
 	filter "configurations:Debug"
-		buildoptions "/MDd"
-		symbols "On"
+		defines "PD_DEBUG"
+		runtime "Debug"
+		symbols "on"
 
 	filter "configurations:Release"
-		buildoptions "/MD"
-		optimize "On"
+		defines "PD_RELEASE"
+		runtime "Release"
+		optimize "on"
 
 	filter "configurations:Dist"
-		buildoptions "/MD"
-		optimize "On"
+		defines "PD_DIST"
+		runtime "Release"
+		optimize "on"

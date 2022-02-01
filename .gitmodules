@@ -7,3 +7,6 @@
 [submodule "Petard/vendor/imgui"]
 	path = Petard/vendor/imgui
 	url = https://github.com/havel-therock/imgui.git
+[submodule "Petard/vendor/glm"]
+	path = Petard/vendor/glm
+	url = https://github.com/havel-therock/glm
