@@ -3,8 +3,6 @@
 #include "Application.h"
 
 
-#ifdef PD_PLATFORM_WINDOWS
-
 extern Petard::Application* Petard::CreateApplication();
 
 int main(int argc, char** argv) {
@@ -17,5 +15,3 @@ int main(int argc, char** argv) {
 	delete app;
 	return 0;
 }
-
-#endif

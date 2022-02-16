@@ -5,7 +5,8 @@
 #include <sstream>
 
 namespace Petard {
-	class PETARD_API KeyEvent : public Event
+	class
+		KeyEvent : public Event
 	{
 	public:
 		inline int GetKeyCode() const { return m_KeyCode; }
@@ -18,7 +19,7 @@ namespace Petard {
 		int m_KeyCode;
 	};
 
-	class PETARD_API KeyPressedEvent : public KeyEvent
+	class KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(int keycode, int repeatCount)
@@ -39,7 +40,7 @@ namespace Petard {
 		int m_RepeatCount;
 	};
 
-	class PETARD_API KeyReleasedEvent : public KeyEvent
+	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(int keycode)

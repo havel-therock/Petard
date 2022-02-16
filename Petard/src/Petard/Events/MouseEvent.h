@@ -5,7 +5,7 @@
 
 namespace Petard {
 	
-	class PETARD_API MouseMovedEvent : public Event
+	class MouseMovedEvent : public Event
 	{
 	public:
 		MouseMovedEvent(float x, float y)
@@ -28,7 +28,7 @@ namespace Petard {
 		float m_MouseX, m_MouseY;
 	};
 
-	class PETARD_API MouseScrolledEvent : public Event
+	class MouseScrolledEvent : public Event
 	{
 	public:
 		MouseScrolledEvent(float xOffset, float yOffset)
@@ -50,7 +50,7 @@ namespace Petard {
 		float m_XOffset, m_YOffset;
 	};
 
-	class PETARD_API MouseButtonEvent : public Event
+	class MouseButtonEvent : public Event
 	{
 	public:
 		inline int GetMouseButton() const { return m_Button; }
@@ -62,7 +62,7 @@ namespace Petard {
 		int m_Button;
 	};
 
-	class PETARD_API MouseButtonPressedEvent : public MouseButtonEvent
+	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonPressedEvent(int button)
@@ -78,7 +78,7 @@ namespace Petard {
 		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
-	class PETARD_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonReleasedEvent(int button)

@@ -6,10 +6,11 @@
 #include "Events/Event.h"
 #include "Petard/Events/ApplicationEvent.h"
 #include "Petard/LayerStack.h"
+#include "Petard/Renderer/Shader/Shader.h"
 
 namespace Petard {
 
-	class PETARD_API Application
+	class Application
 	{
 	public:
 		Application();
@@ -31,6 +32,9 @@ namespace Petard {
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+		
+		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+		std::unique_ptr<Shader> m_Shader;
 
 		static Application* s_Instance;
 	};

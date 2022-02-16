@@ -51,9 +51,9 @@ namespace Petard {
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
-		glfwSetWindowUserPointer(m_Window, &m_Data);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		PD_CORE_ASSERT(status, "Could not initialize GLAD!");
+		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
 		// Set GLFW callbacks
@@ -77,7 +77,7 @@ namespace Petard {
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 			// now passing to key events codes scanned by GLFW
-			// petentially add mapings here from GLFW to PETARD_CODES so it is unified across whoile engine
+			// petentially add mapings here from GLFW to PETARD_CODES so it is unified across whole engine
 			// to use PETARD_CODES... independent from rendering API
 			switch (action)
 			{

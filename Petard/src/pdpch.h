@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <fstream>
 #include <memory>
 #include <utility>
 #include <algorithm>
@@ -16,6 +17,5 @@
 // own stuff
 #include "Petard/Log.h"
 
-#ifdef PD_PLATFORM_WINDOWS
-	#include <Windows.h>
-#endif
+// windows specific
+#include <Windows.h>

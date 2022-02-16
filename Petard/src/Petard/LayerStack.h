@@ -7,7 +7,7 @@
 
 namespace Petard {
 
-	class PETARD_API LayerStack
+	class LayerStack
 	{
 	public:
 		LayerStack();
