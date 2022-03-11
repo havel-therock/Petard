@@ -7,6 +7,8 @@
 #include "Petard/KeyCodes.h"
 #include "Petard/Layer.h"
 #include "Petard/Log.h"
+#include "Petard/Scene/SceneManager.h"
+#include "Petard/Scene/SceneNode.h"
 
 // ----Entry Point-------------
 #include "Petard/EntryPoint.h"

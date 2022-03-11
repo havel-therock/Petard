@@ -17,7 +17,6 @@ namespace Petard {
 	private:
 		static std::shared_ptr<spdlog::logger> s_CoreLogger;
 		static std::shared_ptr<spdlog::logger> s_ClientLogger;
-	
 	};
 
 }
@@ -36,3 +35,6 @@ namespace Petard {
 
 // if defined distro build example: PD_DIST_BUILD
 // #define PD_INFO <- clears out all PD_INFO macros
+
+// OpenGL logging error
+#define CallGL(x) 

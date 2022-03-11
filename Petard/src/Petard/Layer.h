@@ -19,6 +19,7 @@ namespace Petard {
 		inline const std::string& GetName() const { return m_DebugName; };
 	protected:
 		std::string m_DebugName;
+		// public: isActive? bool ||| render, handle events only when layer is active
 
 	};
 

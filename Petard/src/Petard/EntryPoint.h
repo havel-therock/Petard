@@ -9,6 +9,7 @@ int main(int argc, char** argv) {
 	// not here later
 	Petard::Log::Init();
 	PD_CORE_INFO("Initialized");
+	// INFO about drivers gpus used... 
 
 	auto app = Petard::CreateApplication();
 	app->Run();

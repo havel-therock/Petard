@@ -9,7 +9,7 @@ namespace Petard {
 	{
 	public:
 		ImGuiLayer();
-		~ImGuiLayer();
+		~ImGuiLayer(); 
 
 		void OnAttach() override;
 		void OnDetach() override;

@@ -1,5 +1,8 @@
 #include <Petard.h>
 
+#include "GameLayer.h"
+
+/*
 #include <iostream>
 
 #include <glm/vec3.hpp> // glm::vec3
@@ -15,35 +18,15 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 	glm::mat4 Model = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f));
 	return Projection * View * Model;
 }
-
-class ExampleLayer : public Petard::Layer
-{
-public:
-	ExampleLayer()
-		: Layer("Example") {}
-
-	void OnUpdate() override
-	{
-		//PD_INFO("ExampleLayer::Update");
-
-		if (Petard::Input::IsKeyPressed(PD_KEY_TAB))
-		{
-			PD_INFO("Tab was pressed!");
-		}
-	}
-
-	void OnEvent(Petard::Event& event) override
-	{
-		// PD_TRACE("{0}", event);
-	}
-};
+*/
 
 class SandboxApp : public Petard::Application
 {
 public:
 	SandboxApp() 
 	{
-		PushLayer(new ExampleLayer());
+		PushLayer(new GameLayer());
+		// PushOverlay(new ImGuiLayer());
 	}
 
 	~SandboxApp()

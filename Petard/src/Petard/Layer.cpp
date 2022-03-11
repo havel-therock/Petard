@@ -8,6 +8,5 @@ namespace Petard {
 	
 	Layer::~Layer()
 	{
-	
 	}
 }

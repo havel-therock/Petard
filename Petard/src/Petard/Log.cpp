@@ -3,6 +3,7 @@
 
 #include "spdlog/sinks/stdout_color_sinks.h"
 
+#include "glad/glad.h"
 
 namespace Petard {
 
@@ -14,8 +15,7 @@ namespace Petard {
 		spdlog::set_pattern("%^[%T] %n: %v%$");
 		s_CoreLogger = spdlog::stdout_color_mt("PETARD");
 		s_CoreLogger->set_level(spdlog::level::trace);
-		s_ClientLogger = spdlog::stdout_color_mt("APP");
+		s_ClientLogger = spdlog::stdout_color_mt("GAME");
 		s_ClientLogger->set_level(spdlog::level::trace);
 	}
-
 }

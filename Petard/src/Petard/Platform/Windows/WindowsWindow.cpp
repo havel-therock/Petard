@@ -1,5 +1,3 @@
-//#include "pdpch.h"
-//#include "glad/glad.h"
 #include "pdpch.h"
 
 #include "WindowsWindow.h"
@@ -14,6 +12,12 @@ namespace Petard {
 	static void GLFWErrorCallback(int error_code, const char* description)
 	{
 		PD_CORE_ERROR("GLFW Error ({0}): {1}", error_code, description);
+	}
+
+	static void GLErrorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
+	{
+		PD_CORE_ERROR("GL Error: ({0}): {1}", id, message);
+		__debugbreak();
 	}
 
 	Window* Window::Create(const WindowProps& props)
@@ -49,10 +53,16 @@ namespace Petard {
 			s_GLFWInitialized = true;
 		}
 
+		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE); // For GL errors to be visible... strip in release mode or pass second argument as GLFW_FALSE
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
+		
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		PD_CORE_ASSERT(status, "Could not initialize GLAD!");
+
+		glEnable(GL_DEBUG_OUTPUT); //  for GL error callbacks
+		glDebugMessageCallback(GLErrorCallback, nullptr);
+
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 

@@ -50,9 +50,9 @@ namespace Petard {
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); // upload data to GPU
 
 		// tell opengl what layout we passed to buffer
-		// tell opengl we can start outrr data at index 0
-		glEnableVertexAttribArray(0); // can start from 0 ?
-		// 1 - the index where our data starts vertex attribute for shader (for e.g. if one data passed but three different attributes per one vertice (e.g. position, color, texture) we need three glVertexAtribPointer() with diff indexes (foirst arguement (0, 1, 2))
+		// tell opengl we can start our data at index 0
+		glEnableVertexAttribArray(0); // can start from 0 ? enable location in shader
+		// 1 - location in shader the index where our data starts vertex attribute for shader (for e.g. if one data passed but three different attributes per one vertice (e.g. position, color, texture) we need three glVertexAtribPointer() with diff indexes (foirst arguement (0, 1, 2))
 		// 2 - how many primitives creates one vertex [1-4]range
 		// 3 - what is the type of data
 		// 4 - does data should be normalized?
@@ -87,11 +87,13 @@ namespace Petard {
 	void Application::PushLayer(Layer* layer)
 	{
 		m_LayerStack.PushLayer(layer);
+		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* overlay)
 	{
-		m_LayerStack.PopOverlay(overlay);
+		m_LayerStack.PushOverlay(overlay);
+		overlay->OnAttach();
 	}
 	// TO DO POPLAYERS
 
