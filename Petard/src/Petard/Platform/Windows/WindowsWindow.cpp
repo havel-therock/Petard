@@ -1,6 +1,7 @@
 #include "pdpch.h"
 
 #include "WindowsWindow.h"
+#include "Petard/Application.h"
 #include "Petard/Events/ApplicationEvent.h"
 #include "Petard/Events/KeyEvent.h"
 #include "Petard/Events/MouseEvent.h"
@@ -18,6 +19,11 @@ namespace Petard {
 	{
 		PD_CORE_ERROR("GL Error: ({0}): {1}", id, message);
 		__debugbreak();
+	}
+
+	static void FrameBufferResizeCallback(GLFWwindow* window, int width, int height)
+	{
+		glViewport(0, 0, width, height);
 	}
 
 	Window* Window::Create(const WindowProps& props)
@@ -56,11 +62,12 @@ namespace Petard {
 		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE); // For GL errors to be visible... strip in release mode or pass second argument as GLFW_FALSE
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
-		
+		glfwSetFramebufferSizeCallback(m_Window, FrameBufferResizeCallback);
+
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		PD_CORE_ASSERT(status, "Could not initialize GLAD!");
 
-		glEnable(GL_DEBUG_OUTPUT); //  for GL error callbacks
+		glEnable(GL_DEBUG_OUTPUT); // for GL error callbacks
 		glDebugMessageCallback(GLErrorCallback, nullptr);
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);

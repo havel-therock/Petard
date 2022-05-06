@@ -1,0 +1,6 @@
+
+1. Raw Pointers to smart pointers!!!
+
+SceneNode and RenderableObject
+contains raw pointers. And deleting nodes is not handled. So we need to convert them to smart pointers.
+Probably std::shared_ptr<>() to allow coping.

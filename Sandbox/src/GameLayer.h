@@ -1,8 +1,7 @@
 #pragma once
-
 #include "Petard.h"
 
-class GameLayer : public Petard::Layer 
+class GameLayer : public Petard::Layer
 {
 public:
 	GameLayer();
@@ -11,9 +10,9 @@ public:
 	virtual void OnUpdate() override;
 	virtual void OnEvent(Petard::Event& event) override;
 
-private:
-	Petard::SceneManager m_SceneManager;
-	//std::shared_ptr<Petard::SceneNode> m_RootScene;
+	void LoadLevel();
+	// Petard::SceneManager m_SceneManager;
+	//std::shared_ptr<Petard::SceneNode> m_RootScene; 
 };
 
 /*

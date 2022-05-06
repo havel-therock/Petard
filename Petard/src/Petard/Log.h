@@ -34,7 +34,4 @@ namespace Petard {
 //#define PD_FATAL(...)          ::Petard::Log::GetClientLogger()->fatal(__VA_ARGS__)
 
 // if defined distro build example: PD_DIST_BUILD
-// #define PD_INFO <- clears out all PD_INFO macros
-
-// OpenGL logging error
-#define CallGL(x) 
+// #define PD_INFO <- clears out all PD_INFO macros 

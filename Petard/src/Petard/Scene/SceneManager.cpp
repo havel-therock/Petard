@@ -5,15 +5,16 @@
 
 namespace Petard {
 
-	SceneManager::SceneManager(std::shared_ptr<SceneNode> RootScene)
-		: m_RootScene(RootScene) {}
+	SceneManager::SceneManager(/*std::shared_ptr<SceneNode> RootScene*/)
+		/* : m_RootScene(RootScene) */ {}
 
 	std::shared_ptr<SceneNode> SceneManager::GetNodeByName(const std::string& IdName) const
 	{
-		for i
+		//for i
 		return std::shared_ptr<SceneNode>();
 	}
 	void SceneManager::RenderScene()
 	{
+
 	}
 }

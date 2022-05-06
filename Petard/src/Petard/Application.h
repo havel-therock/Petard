@@ -7,6 +7,8 @@
 #include "Petard/Events/ApplicationEvent.h"
 #include "Petard/LayerStack.h"
 #include "Petard/Renderer/Shader/Shader.h"
+#include "Petard/Renderer/Buffer.h"
+#include "Petard/Renderer/VertexArray.h"
 
 namespace Petard {
 
@@ -26,15 +28,14 @@ namespace Petard {
 		inline static Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() const { return *m_Window; }
 
+
 	private:
+		// void RenderLayer(Layer layer) { layer.OnRender(); }
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
-		
-		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
-		std::unique_ptr<Shader> m_Shader;
 
 		static Application* s_Instance;
 	};

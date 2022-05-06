@@ -1,6 +1,10 @@
+#pragma once
 #include <Petard.h>
+#include <Petard/EntryPoint.h>
 
 #include "GameLayer.h"
+
+// #include "GameLayer.h"
 
 /*
 #include <iostream>

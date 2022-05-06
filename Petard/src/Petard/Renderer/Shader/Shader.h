@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "pdpch.h"
 
+#include "glm/glm.hpp"
 
 namespace Petard {
 
@@ -12,11 +13,11 @@ namespace Petard {
 
 		void Bind() const;
 		void Unbind() const;
-	
+		
+		void UploadUniformMat4(const std::string& name, const glm::mat4& matrix);
 	private:
 		unsigned int m_ShaderProgramID;
 
 		std::string LoadShaderSource(const std::string& pathToShader);
 	};
-
 }

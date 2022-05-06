@@ -38,7 +38,7 @@ namespace Petard {
 		virtual void SetVSync(bool enabled) = 0;
 		virtual bool IsVSync() const = 0;
 
-		virtual void* GetNativeWindow() const = 0; // GLFW/<or any other API> window pointer
+		virtual void* GetNativeWindow() const = 0; // GLFW <or any other API> window pointer
 
 		static Window* Create(const WindowProps& props = WindowProps());
 	};
