@@ -1,11 +1,11 @@
 #include "GameLayer.h"
-#include <Petard.h>
 
 #include <memory>
 
 GameLayer::GameLayer()
 	: Layer("GameLayer") 
 	{
+		
 		// m_SceneManager = Petard::SceneManager(); // move to engine (class Layer)
 	}
 
@@ -30,6 +30,34 @@ void GameLayer::OnDetach()
 
 void GameLayer::OnUpdate(/*Petard::Timestep ts*/) // deltatime time between frames so the movemnt would be independant from frame rate
 {
+	ZBufferToggle(true);
+	if (Petard::Input::IsKeyPressed(PD_KEY_TAB)) {
+		PD_INFO("CAMERA POS: x:{0}, y:{1}, z:{2}", GetCamera().GetPosition().x, GetCamera().GetPosition().y, GetCamera().GetPosition().z);
+	}
+
+	std::vector<Petard::SceneNode*> cubes = GetAllScenesByName("Primitive-Cube");
+	// PD_INFO("count of cubes: {0}", cubes.size());
+	for (auto cubeObj : cubes)
+	{
+		cubeObj->m_RenderableObject->m_Rotation += glm::vec3(0.5f, 1.0f, 1.5f);
+		//cubeObj->m_RenderableObject->m_Position += glm::vec3(0.0f, 0.0f, 0.05f);
+	}
+	std::vector<Petard::SceneNode*> pyramides = GetAllScenesByName("Primitive-Pyramid");
+	// PD_INFO("count of cubes: {0}", cubes.size());
+	for (auto pyramidObj : pyramides)
+	{
+		pyramidObj->m_RenderableObject->m_Rotation += glm::vec3(0.0f, 0.5f, 0.0f);
+		//cubeObj->m_RenderableObject->m_Position += glm::vec3(0.0f, 0.0f, 0.05f);
+	}
+
+	std::vector<Petard::SceneNode*> sphere = GetAllScenesByName("Primitive-Circle");
+	// PD_INFO("count of cubes: {0}", cubes.size());
+	for (auto circleObj : sphere)
+	{
+		circleObj->m_RenderableObject->m_Rotation += glm::vec3(0.0f, 10.0f, 0.0f);
+		//cubeObj->m_RenderableObject->m_Position += glm::vec3(0.0f, 0.0f, 0.05f);
+	}
+
 	if (Petard::Input::IsKeyPressed(PD_KEY_DOWN))
 	{
 		GetCamera().SetRotation(GetCamera().GetRotation() + glm::vec3({ -5.0,0.0,0.0 }));
@@ -90,7 +118,7 @@ void GameLayer::OnUpdate(/*Petard::Timestep ts*/) // deltatime time between fram
 		GetCamera().SetPosition(GetCamera().GetPosition() + glm::vec3({ 0.0, -0.1, 0.0 }));
 	}
 
-	PD_INFO("Camera position: x:{0}, y:{1}, z:{2}", GetCamera().GetPosition().x, GetCamera().GetPosition().y, GetCamera().GetPosition().z);
+	// PD_INFO("Camera position: x:{0}, y:{1}, z:{2}", GetCamera().GetPosition().x, GetCamera().GetPosition().y, GetCamera().GetPosition().z);
 
 	// m_renderQueue is being constructed every frame automaticly 
 	// based on SceneGraph
@@ -116,6 +144,10 @@ void GameLayer::OnUpdate(/*Petard::Timestep ts*/) // deltatime time between fram
 
 void GameLayer::OnEvent(Petard::Event& event)
 {
+	Petard::EventDispatcher worker(event);
+	worker.Dispatch<Petard::MouseScrolledEvent>(PD_BIND_EVENT_FN(GameLayer::OnMouseScrollEvent));
+	// more typew of events
+	//PD_TRACE("{0}", event);
 	// on Event change cameraDetails props
 }
 
@@ -187,7 +219,7 @@ void GameLayer::LoadLevel()
 		-10.0f,  -10.0f,  -10.0f,  0.7f, 0.1f, 0.1f, 1.0f,	// stride 1
 		 10.0f,  -10.0f,  -10.0f,  0.1f, 0.7f, 0.1f, 1.0f,	// stride 2
 		-10.0f,  10.0f,    -2.0f,   0.1f, 0.1f, 0.7f, 1.0f,	// stride 3
-		 10.0f,  10.0f,    -2.0f,   0.1f, 0.1f, 0.1f, 1.0f		// stride 4
+		 10.0f,  10.0f,    -2.0f,   0.1f, 0.1f, 0.1f, 1.0f	// stride 4
 	};
 	uint32_t indicesFloor[6] = { 0, 1, 2, 2, 1, 3 };
 
@@ -209,8 +241,61 @@ void GameLayer::LoadLevel()
 	cube->m_RenderableObject->m_VertexArray->AddVertexBuffer(vbCube);
 	std::shared_ptr<Petard::IndexBuffer> CubeIB = std::make_shared<Petard::IndexBuffer>(cube->indices, sizeof(cube->indices) / sizeof(uint32_t));
 	cube->m_RenderableObject->m_VertexArray->SetIndexBuffer(CubeIB);
+	//cube->m_RenderableObject->m_Position = glm::vec3(5.0f, 0.0f, 0.0f);
+	//cube->m_RenderableObject->m_Scale = 2.5f;
+	cube->m_RenderableObject->m_Rotation = glm::vec3(70.0f, 20.0f, 45.0f);
+	//AddToScene(*cube);
+	
+	//####################################################### second cube
 
-	AddToScene(*cube);
+	Petard::Cube* cube2 = new Petard::Cube();
+
+	std::shared_ptr<Petard::VertexBuffer> vbCube2 = std::make_shared<Petard::VertexBuffer>(cube2->vertices, sizeof(cube2->vertices));
+	vbCube2->SetLayout(layout);
+
+	cube2->m_RenderableObject->m_VertexArray->AddVertexBuffer(vbCube2);
+	std::shared_ptr<Petard::IndexBuffer> CubeIB2 = std::make_shared<Petard::IndexBuffer>(cube2->indices, sizeof(cube2->indices) / sizeof(uint32_t));
+	cube2->m_RenderableObject->m_VertexArray->SetIndexBuffer(CubeIB2);
+	cube2->m_RenderableObject->m_Position = glm::vec3(5.0f, 10.0f, 0.0f);
+	cube2->m_RenderableObject->m_Scale = 2.5f;
+	//cube2->m_RenderableObject->m_Rotation = glm::vec3(1.0f, 3.0f, 45.0f);
+	AddToScene(*cube2);
+	// ################################################################ 
+	Petard::Primitive primitive_cube(Petard::PrimitiveType::CUBE);
+	primitive_cube.m_RenderableObject->m_Position = glm::vec3(0.0f, 0.0f, -2.0f);
+	// primitive_cube->m_RenderableObject->m_Scale = 4.5f;
+	AddToScene(primitive_cube);
+
+	Petard::Primitive primitive_pyramid(Petard::PrimitiveType::PYRAMID);
+	primitive_pyramid.m_RenderableObject->m_Position = glm::vec3(3.0f, 0.0f, -2.0f);
+	primitive_pyramid.m_RenderableObject->m_Scale = 2.5f;
+	AddToScene(primitive_pyramid);
+
+
+	Petard::Primitive p_Quad(Petard::PrimitiveType::QUAD);
+	p_Quad.m_RenderableObject->m_Position = glm::vec3(0.0f, -4.0f, 0.0f);
+	p_Quad.m_RenderableObject->m_Scale = 200.0f;
+	p_Quad.m_RenderableObject->m_Rotation = glm::vec3(90.0f, 0.0f, 0.0f);
+	AddToScene(p_Quad);
+
+	glm::vec3 rotationC(0.0f, 0.0f, 0.0f);
+	for (int i = 0; i < 1; i++)
+	{
+		Petard::Primitive p_Circle(Petard::PrimitiveType::CIRCLE);
+		p_Circle.m_RenderableObject->m_Position = glm::vec3(-3.0f, 0.0f, 0.0f);
+		p_Circle.m_RenderableObject->m_Scale = 2.5f;
+		p_Circle.m_RenderableObject->m_Rotation = rotationC;
+		rotationC += glm::vec3(0.0f, 20.0f, 0.0f);
+		AddToScene(p_Circle);
+
+	}
+
 	
 
+}
+
+bool GameLayer::OnMouseScrollEvent(Petard::MouseScrolledEvent event)
+{
+	PD_INFO("{0}", event.ToString());
+	return true; // if event is handeled return true else return false
 }

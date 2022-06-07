@@ -1,5 +1,5 @@
 #pragma once
-#include "Petard.h"
+#include <Petard.h>
 
 class GameLayer : public Petard::Layer
 {
@@ -12,7 +12,9 @@ public:
 
 	void LoadLevel();
 	// Petard::SceneManager m_SceneManager;
-	//std::shared_ptr<Petard::SceneNode> m_RootScene; 
+	//std::shared_ptr<Petard::SceneNode> m_RootScene;
+private:
+	bool OnMouseScrollEvent(Petard::MouseScrolledEvent event);
 };
 
 /*

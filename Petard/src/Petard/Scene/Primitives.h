@@ -2,8 +2,49 @@
 #include "SceneNode.h"
 
 namespace Petard {
+
+	enum class PrimitiveType
+	{
+		NONE = 0,
 	//2D
-	
+		LINE,
+		TRIANGLE,
+		QUAD,
+		CIRCLE,
+	//3D
+		CUBE,
+		PYRAMID,
+		ROLLER,
+		CONE,
+		SPHERE,
+	};
+
+	class Primitive : public SceneNode
+	{
+	public:
+		Primitive(PrimitiveType primitiveType);
+		//Primitive(PrimitiveType primitiveType, int precision);
+		~Primitive();
+		inline void SetPrecision(int precision) { m_Precision = precision; }
+	private:
+		//2D
+		void ConstructTriangle();
+		void ConstructQuad();
+		void ConstructCircle();
+		//3D
+		void ConstructCube();
+		void ConstructPyramid();
+		void ConstructCone();
+		void ConstructSphere();
+
+		void SetCommonSettings();
+
+		int m_Precision;
+		float* m_Vertices;
+		int m_VerticesLength;
+		uint32_t* m_Indices;
+		int m_IndicesLength;
+	};
 	
 	//3D
 	class Cube : public SceneNode
@@ -27,7 +68,7 @@ namespace Petard {
 			1.0f,  1.0f, -1.0f,		0.0f, 0.7f, 0.3f, 1.0f	// stride 3
 		};
 
-		uint32_t indices[36] = { 
+		uint32_t indices[36] = {
 			0, 1, 3,
 			0, 2, 3,
 
@@ -41,10 +82,10 @@ namespace Petard {
 			2, 6 ,7,
 
 			0, 2, 6,
-			0, 6, 4, 
+			0, 6, 4,
 
 			1, 3, 7,
-			1, 7, 5 
+			1, 7, 5
 		};
 
 

@@ -5,6 +5,7 @@
 #include "Petard/Camera/OrtographicCamera.h"
 #include "Petard/Camera/PerspectiveCamera.h"
 #include "Petard/Application.h"
+#include "Petard/glad_glfw.h"
 
 namespace Petard {
 
@@ -14,7 +15,7 @@ namespace Petard {
 		m_RootScene = std::make_unique<SceneNode>(false);
 		m_RenderQueue = std::make_unique<RenderQueue>();
 		m_Camera = std::make_unique<Camera>();
-		SetCamera(CameraType::NONE); // for now NONE will be interpreted as ORTHOGONAL  // fucking disaster
+		SetCamera(CameraType::NONE); // for now NONE will be interpreted as ORTHOGONAL  // disaster
 	}
 
 	void Layer::OnRender()
@@ -38,10 +39,29 @@ namespace Petard {
 		m_RootScene->AddChildNode(sceneNode);
 	}
 
+	std::vector<SceneNode*> Layer::GetAllScenesByName(const std::string& name)
+	{		
+		std::vector<SceneNode*> scenes;
+		m_RootScene->GetAllNodesByName(scenes, name);
+		// PD_INFO("count of scenes: {0}", scenes.size());
+		return scenes;
+	}
+
 	void Layer::SetCamera(CameraType cameraType)
 	{
 		m_Camera->SetEngineCamera(cameraType);
 		m_RenderQueue->UploadCamera(&(m_Camera->GetEngineCamera()));
+	}
+
+	void Layer::ZBufferToggle(bool enable)
+	{
+		if (enable)
+		{
+			glDepthFunc(GL_LESS);
+		} else {
+			glDepthFunc(GL_ALWAYS);
+		}
+
 	}
 	/*
 	void Layer::SetCamera(CameraProps)

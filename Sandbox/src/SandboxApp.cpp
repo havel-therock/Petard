@@ -3,8 +3,7 @@
 #include <Petard/EntryPoint.h>
 
 #include "GameLayer.h"
-
-// #include "GameLayer.h"
+#include "HUDLayer.h"
 
 /*
 #include <iostream>
@@ -30,6 +29,7 @@ public:
 	SandboxApp() 
 	{
 		PushLayer(new GameLayer());
+		PushOverlay(new HUDLayer());
 		// PushOverlay(new ImGuiLayer());
 	}
 

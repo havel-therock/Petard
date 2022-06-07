@@ -3,6 +3,7 @@
 #include "RenderQueue.h"
 #include "RenderableObject.h"
 
+#include "glad/glad.h"
 
 namespace Petard {
 
@@ -16,7 +17,7 @@ namespace Petard {
 		static void BeginScene(/*camera, lighting, env*/);
 		static void EndScene(std::shared_ptr<RenderQueue> renderQueue);
 		
-		static void Render(RenderableObject& renderableObject);
+		static void Render(RenderableObject& renderableObject, unsigned int renderMode = GL_TRIANGLES);
 		static void BindAndRender(RenderableObject renderableObject);
 
 		/* Submit renderable object to the render queue */

@@ -3,6 +3,9 @@
 
 namespace Petard {
 	
+	// TO DO:
+	// ADD DEFAULT CONSTRUCTOR WITH NO PARAMETERS
+
 	SceneNode::SceneNode(bool renderable, const std::string IdName)
 		: m_IdName(IdName), m_Visible(true), m_IsRenderable(renderable)
 	{
@@ -32,6 +35,18 @@ namespace Petard {
 		m_ChildScenes.push_back(std::make_shared<SceneNode>(childNode));
 	}
 
+	void SceneNode::GetAllNodesByName(std::vector<SceneNode*>& scenes, const std::string& IdName)
+	{
+		for (auto& childScene : m_ChildScenes)
+		{
+			if (childScene->m_IdName == IdName)
+				scenes.push_back(childScene.get());
+			childScene->GetAllNodesByName(scenes, IdName);
+		}
+		return;
+	}
+	
+
 	void SceneNode::ConstructRenderQueue(std::vector<RenderableObject>& renderQueue)
 	{	
 		for (auto& childScene : m_ChildScenes)
@@ -39,10 +54,11 @@ namespace Petard {
 			childScene->ConstructRenderQueue(renderQueue);
 		}
 		if (m_IsRenderable == true) {
+			m_RenderableObject->RecalculateModelMatrix();
 			renderQueue.push_back(*m_RenderableObject);
 		}
-		
 	}
+
 	/*
 	void SceneNode::OnRender(RenderQueue& renderQueue)
 	{

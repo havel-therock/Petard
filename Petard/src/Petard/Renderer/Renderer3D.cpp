@@ -1,8 +1,6 @@
 #include "pdpch.h"
 #include "Renderer3D.h"
 
-#include "glad/glad.h"
-
 namespace Petard {
 
 	void Renderer3D::Init()
@@ -24,9 +22,9 @@ namespace Petard {
 		RenderQueue->Render();
 	}
 
-	void Renderer3D::Render(RenderableObject& renderableObject)
+	void Renderer3D::Render(RenderableObject& renderableObject, unsigned int renderMode)
 	{
-		glDrawElements(GL_TRIANGLES, renderableObject.m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+		glDrawElements(renderMode, renderableObject.m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 	}
 
 	void Renderer3D::BindAndRender(RenderableObject renderableObject)

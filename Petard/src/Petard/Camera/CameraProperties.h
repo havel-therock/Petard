@@ -17,9 +17,11 @@ namespace Petard {
 	class CameraProperties
 	{
 	public:
-		CameraProperties() 
+		CameraProperties()
 			: m_CameraType(CameraType::NONE),
-			m_Position(glm::vec3(0.0f)),
+			m_Position(glm::vec3(0.0f, 0.0f, 3.0f)),
+			m_Target(glm::vec3(0.0f)),
+			m_Direction(glm::normalize(m_Position - m_Target)),
 			m_Rotation(glm::vec3(0.0f)),
 			m_RenderDistance(100.0f),
 			m_ProjectionMatrix(glm::mat4(1.0f)),
@@ -32,6 +34,8 @@ namespace Petard {
 		// ORTHOGONAL, PERSPECTIVE
 		CameraType m_CameraType;
 		glm::vec3 m_Position; // quaternions chage to vec4 ? 
+		glm::vec3 m_Target; // point where camear look at
+		glm::vec3 m_Direction; //direction from target to the camera pos
 		glm::vec3 m_Rotation;
 		float m_RenderDistance;
 		glm::mat4 m_ProjectionMatrix;

@@ -52,6 +52,10 @@ namespace Petard {
 		for (auto& object : m_RenderQueue) {
 			// add dynamic compiling and appending to shaderList new shaders pointed by objects
 			// add checking for existance of shader in shader list
+			
+			if (m_ShadersList.count(object.m_ShaderID) == 0)
+				m_ShadersList.insert({ object.m_ShaderID, std::make_unique<Shader>(object.shaderList) });
+
 			m_ShadersList[object.m_ShaderID]->Bind();
 			if (m_Camera != nullptr)
 			{
@@ -64,7 +68,7 @@ namespace Petard {
 				// m_ShadersList[object.m_ShaderID]->UploadUniformMat4("u_Model", glm::mat4(1.0f));
 			}
 			// Upload object uniforms
-			// m_ShadersList[object.m_ShaderID]->UploadUniformMat4("u_Model", object.GetUniform("u_Model"));
+			m_ShadersList[object.m_ShaderID]->UploadUniformMat4("u_Model", object.m_ModelMatrix);
 
 			// bind vertex array from object? or do it within R3D::Render() function
 			object.m_VertexArray->Bind();

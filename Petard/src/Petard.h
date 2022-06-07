@@ -13,6 +13,10 @@
 #include "Petard/Renderer/Buffer.h"
 #include "Petard/Camera/Camera.h"
 #include "Petard/Scene/Primitives.h"
+#include "Petard/Events/ApplicationEvent.h"
+#include "Petard/Events/KeyEvent.h"
+#include "Petard/Events/MouseEvent.h"
+
 //#include "Petard/Renderer/Renderer3D.h"
 //#include "Petard/Scene/SceneManager.h"
 //#include "Petard/Scene/SceneNode.h"

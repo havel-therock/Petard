@@ -36,7 +36,8 @@ namespace Petard {
 		/* user functions */
 		// SceneGraph
 		void AddToScene(SceneNode childNode);
-		SceneNode& GetSceneByName(const std::string& name) {}; // TO DO:
+		std::vector<SceneNode*> GetAllScenesByName(const std::string& name);
+		//SceneNode* GetSceneByName(const std::string& name);
 
 		//Camera move functional camera. speed of camera and any other properties are held in user defined objects
 		/*
@@ -50,6 +51,8 @@ namespace Petard {
 		// inline Camera& GetCamera() const { return *(m_Camera.get()); }
 		// GetCamera() returns reference to the m_Camera.userCamera
 		inline UserCamera& GetCamera() const { return m_Camera->GetUserCamera(); }
+
+		void ZBufferToggle(bool enable);
 
 	protected:
 		std::string m_DebugName; 

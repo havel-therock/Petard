@@ -8,6 +8,7 @@ namespace Petard {
 	public:
 		UserCamera(CameraProperties* cameraProperties)
 			: m_CameraProps(cameraProperties) {}
+
 		inline const glm::vec3& GetPosition() const { return m_CameraProps->m_Position; }
 		inline void SetPosition(const glm::vec3& position) { m_CameraProps->m_Position = position; }
 		inline const glm::vec3& GetRotation() const { return m_CameraProps->m_Rotation; }

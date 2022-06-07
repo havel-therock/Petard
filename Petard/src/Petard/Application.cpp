@@ -111,11 +111,14 @@ namespace Petard {
 		//move this to the LAYER
 		glEnable(GL_DEPTH_TEST);
 		// Accept fragment if it closer to the camera than the former one
-		glDepthFunc(GL_LESS);
-		
+		//glDepthFunc(GL_LESS);
 		// for alpha belnding
 		// glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		// glEnable(GL_BLEND);
+
+
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
 	}
  
 	Application::~Application()
@@ -172,9 +175,11 @@ namespace Petard {
 
 
 			for (Layer* layer : m_LayerStack) {
+				// layer->activateGLTests()
+				// layer->clearBuffer()
 				layer->OnUpdate();
 				layer->OnRender();
-
+				// layer->deactivateGLTests()
 				// __debugbreak(); chechk debug if order of render of layers is correct. Event should go down the stack and renders up the stack
 				// get from config on Petard::Init()
 			}
