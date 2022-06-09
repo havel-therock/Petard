@@ -18,7 +18,7 @@ namespace Petard {
 	static void GLErrorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
 	{
 		PD_CORE_ERROR("GL Error: ({0}): {1}", id, message);
-		__debugbreak();
+		//__debugbreak();
 	}
 
 	static void FrameBufferResizeCallback(GLFWwindow* window, int width, int height)
