@@ -296,6 +296,6 @@ void GameLayer::LoadLevel()
 
 bool GameLayer::OnMouseScrollEvent(Petard::MouseScrolledEvent event)
 {
-	PD_INFO("{0}", event.ToString());
+	PD_INFO("{0} handled by GAME layer", event.ToString());
 	return true; // if event is handeled return true else return false
 }

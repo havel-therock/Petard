@@ -34,5 +34,12 @@ void HUDLayer::OnUpdate()
 
 void HUDLayer::OnEvent(Petard::Event& event)
 {
+	Petard::EventDispatcher worker(event);
+	worker.Dispatch<Petard::MouseScrolledEvent>(PD_BIND_EVENT_FN(HUDLayer::OnMouseScrollEvent));
+}
 
+bool HUDLayer::OnMouseScrollEvent(Petard::MouseScrolledEvent event)
+{
+	PD_INFO("{0} passed to HUD layer but not handled", event.ToString());
+	return false; // if event is handeled return true else return false
 }

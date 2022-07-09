@@ -9,4 +9,7 @@ public:
 	virtual void OnDetach() override;
 	virtual void OnUpdate() override;
 	virtual void OnEvent(Petard::Event& event) override;
+
+private:
+	bool OnMouseScrollEvent(Petard::MouseScrolledEvent event);
 };
